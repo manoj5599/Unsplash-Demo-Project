@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import HomeTabs from "./components/HomeTabs";
-import CardComponent from "./components/CardComponent";
+import MasonaryComponent from "./components/MasonaryComponent";
 import axios from "axios";
 import ImageComponent from "./components/ImageComponent";
 import { useTheme } from "@mui/material/styles";
@@ -18,6 +18,7 @@ const Home = () => {
   const accessKey = "vuUlIONttzIVr41_BHxAeDqKaRTJyD9B0p5GzjqP9iw";
 
   const getData = async (count = 16) => {
+    setIsLoading(true);
     await axios
       .get(
         `${apiRoot}/photos?client_id=${accessKey}&page=${currentPage}&per_page=${count}`
@@ -34,6 +35,7 @@ const Home = () => {
   }, []);
 
   const searchData = async () => {
+    setIsLoading(true);
     await axios
       .get(
         `${apiRoot}/search/photos?client_id=${accessKey}&page=1&per_page=16&query=${search}`
@@ -53,17 +55,19 @@ const Home = () => {
   }, [search]);
   return (
     <div className="container">
-      <Header />
-      <HomeTabs />
-      {!matchDownMd ? (
-        <ImageComponent search={search} handleChange={handleChangeSearch} />
-      ) : null}
-      <CardComponent
-        data={data}
-        getData={getData}
-        loading={loading}
-        matchDownMd={matchDownMd}
-      />
+      <div>
+        <Header />
+        <HomeTabs />
+        {!matchDownMd ? (
+          <ImageComponent search={search} handleChange={handleChangeSearch} />
+        ) : null}
+        <MasonaryComponent
+          data={data}
+          getData={getData}
+          matchDownMd={matchDownMd}
+          loading={loading}
+        />
+      </div>
     </div>
   );
 };
