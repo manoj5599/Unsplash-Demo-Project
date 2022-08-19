@@ -24,8 +24,9 @@ const Home = () => {
       )
       .then((res) => {
         setData((prevData) => [...prevData, ...res.data]);
+        setIsLoading(false);
       });
-    setIsLoading(false);
+
     setCurrentPage((prevPage) => prevPage + 1);
   };
   useEffect(() => {

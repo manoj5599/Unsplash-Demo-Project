@@ -18,7 +18,7 @@ const CardComponent = ({ data, getData, loading, matchDownMd }) => {
       <Box sx={{ paddingLeft: "12px", paddingRight: "12px" }}>
         <InfiniteScroll
           dataLength={data.length}
-          next={() => getData(16)}
+          next={() => getData()}
           hasMore={true}
           loader={<h4>Loading...</h4>}
         >
